@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 50px;
+        }
+        .system{
+            width: 500px;
+            height: 300px;
+            border: 2px solid black;
+            background-color: lightgrey;
+            color:black;
+        }
+        .title{
+            font-size: 30px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .text{
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .score{
+            margin: 10px 0;
+            width: 100px;
+        }
+        button{
+            margin: 10px 0;
+            background-color: bisque;
+            width: 50px;
+            height: 30px;
+        }
+        .standard{
+            width: 500px;
+            height: 300px;
+            border: 2px solid black;
+            background-color: lightgrey;
+            color:black;
+            font-size: 30px;
+        }
+        .ans{
+            margin: 10px 0;
+        }
+        .small{
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="system">
+        <div class="title">成績分級系統</div>
+        <div class="text">請輸入考試成績：</div>
+        <input min="0" max="100" class="score" value="">
+        <div><button type="">計算</button></div>
+        <p class="ans" id="output"></p>
+    </div>
+    <div class="standard">
+        <p>成績參考標準</p>
+        <div class="small">
+            0~59 => 您的成績不及格
+            <br>
+            60~69 => 您的成績是丁級
+            <br>
+            70~79 => 您的成績是丙級
+            <br>
+            80~89 => 您的成績是乙級
+            <br>
+            90~99 => 您的成績是甲級
+            <br>
+            100 => 您的成績是優級
+        </div>
+    </div>
+
+    <script>
+        //誰
+        //輸入框的資料 ＋ 按鈕觸發 ＋ 輸出結果文字
+        const grade_input = document.querySelector('input')
+        const btn = document.querySelector('button')
+        const output = document.querySelector('#output')
+
+        console.log(grade_input,btn,output)
+
+        //什麼時候
+        //按鈕按下去的時候
+        
+        btn.onclick = function(){
+            let score = grade_input.value
+
+        //做什麼
+        //取得輸入框的資料 > 進行判斷決定等級 > 將分數與成績輸出在畫面上
+
+
+        //無輸入直接按計算 - 檢查字串是否為空（與空白鍵概念相同可省略）> score == '' 
+        //非數字 - 用isNaN偵測 > is not a namber
+        //小數點 - Number.isInteger(score)去偵測是否為整數,因此語法檢查值為布林值,需再用!(not)將結果反轉
+        //空白鍵 - 將字串中所有空白刪除後,如果是空值就不行 > score.trim() == ''
+
+
+        console.log(Number.isInteger(Number(score)));
+
+            if (score > 100 || score < 0 || isNaN(score)|| score == '' || score.trim() == '' || !Number.isInteger(Number(score))) {
+            output.innerHTML = '輸入內容有誤，請重新輸入'
+            }else{
+                if ( score == 100){
+                    result = '優級'
+                }else if( score >=90){
+                    result = '甲級'
+                }else if( score >=80){
+                    result = '乙級'
+                }else if( score >=70){
+                    result = '丙級'
+                }else if( score >=60){
+                    result = '丁級'
+                }else{
+                    result = '不及格'
+                }
+                output.innerHTML = '您輸入的分數是' + score + '分,您學期成績是：' + result
+                }
+        }
+    </script>
+</body>
+</html>
